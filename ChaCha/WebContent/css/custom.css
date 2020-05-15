@@ -1,0 +1,21 @@
+@charset "UTF-8";
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
+                   
+.navbar-brand, h1, h2, h3, h4{
+	font-family: "Jeju Gothic";
+}
+h5 {
+	font-family: "Jeju Gothic";
+	font-size : 18px;
+}
+body {
+	font-family: "Hanna";
+}
+
+#footer {
+	font-family: "KoPub Batang";
+}
+
+             
