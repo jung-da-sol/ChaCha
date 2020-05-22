@@ -1,5 +1,5 @@
-<%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.io.PrintWriter"%>
 <%@ page import="member.MemberDAO" %>
 
 <!DOCTYPE html>
@@ -13,57 +13,26 @@
 	<title>Cha Cha Chat</title>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="js/bootstrap.js"></script>
-	<script type="text/javascript"> 
-		
 	
-	function registerCheckFunction() {
-			var memberID = $('#memberID').val();
-			setTimeout
-			$.ajax({
-				type : 'POST',
-				url : './MemberRegisterCheckServlet',
-				data : {memberID : memberID},
-				success : function(result){
-					if(result == 1) {
-						$('#checkMessage').html('사용할 수 있는 아이디 입니다.');
-						$('#checkType').attr('class', 'modal-content panel-success');
-					} else {
-						$('#checkMessage').html('사용할 수 없는 아이디 입니다.');
-						$('#checkType').attr('class', 'modal-content panel-warning');
-					}
-					$('#checkModal').modal("show");
-				} 
-			});
-		}
-	
-		function passwordCheckFunction(){
-			var memberPassword1 = $('#memberPassword1').val();
-			var memberPassword2 = $('#memberPassword2').val();
-			if(memberPassword1 != memberPassword2){
-				$('#passwordCheckMessage').html('비밀번호가 일치하지 않습니다.');
-			} else {
-				$('#passwordCheckMessage').html('');
-			}
-		}
-	</script>
 </head>
 <body>
 <%
 	String memberID = null;
+
 	if(session.getAttribute("memberID") != null ){
 		memberID = (String) session.getAttribute("memberID");
 	}
-
+	
+	
 	if(memberID != null) {
 		session.setAttribute("messageType", "오류메시지");
 		session.setAttribute("messageContent", "현재 로그인이 되어있는 상태입니다.");
 		response.sendRedirect("index.jsp");
 		return;
 	}
-	
-%>
 
-	<nav class="navbar navbar-default">
+%>
+<nav class="navbar navbar-default">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
 			data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -75,11 +44,13 @@
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="index.jsp">메인</a></li>
-				<li><a href="find.jsp">친구찾기</a></li>
+				<li class="active"><a href="index.jsp">메인</a></li>
+				<li ><a href="find.jsp">친구찾기</a></li>
+				<li ><a href="box.jsp">메시지함<span id="unread" class="label label-info"></span></a></li>
 			</ul>
 			<%
 				if(memberID == null) {
+					
 			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -88,56 +59,39 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="login.jsp">로그인</a></li>
-						<li class="active"><a href="join.jsp">회원가입</a></li>
-					</ul>	
-					
+						<li><a href="join.jsp">회원가입</a></li>
+					</ul>
 				</li>	
 			</ul>
 			<%
-				}
+			}
 			%>
+
 		</div>
 	</nav>	
 	<div class="container">
-		<form method="post" action="./memberRegister">
+		<form method="post" action="./memberLogin">
 			<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th colspan="3"><h4>회원가입</h4></th>
+						<th colspan="2"><h4>로그인</h4></th>
 					</tr>
-				</thead>
+				</thead>	
 				<tbody>
 					<tr>
-						<th style="width: 110px;"><h5>아이디</h5></th>
-						<td><input class="form-control" type="text" id="memberID" name="memberID" maxlength="20" placeholder="아이디를 입력하세요">
-						<td style="width: 110px;"><button class="btn btn-primary" onclick="registerCheckFunction();" type="button">중복체크</button></td>
+						<td style="width: 110px;"><h5>아이디</h5></td>
+						<td><input class="form-control" type="text" name="memberID" maxlength="20" placeholder="아이디를 입력하세요"></td>
 					</tr>
 					<tr>
-						<th style="width: 110px;"><h5>비밀번호</h5></th>
-						<td colspan="2"><input onkeyup="passwordCheckFunction();" class="form-control" type="password" id="memberPassword1" name="memberPassword1" maxlength="20" placeholder="비밀번호를 입력하세요"></td>
-					</tr>				<!-- onkeyup = 비밀번호 입력할 때마다 실행 -->
-					<tr>
-						<th style="width: 120px;"><h5>비밀번호확인</h5></th>
-						<td colspan="2"><input onkeyup="passwordCheckFunction();" class="form-control" type="password" id="memberPassword2" name="memberPassword2" maxlength="20" placeholder="비밀번호 확인"></td>
+						<td style="width: 110px;"><h5>비밀번호</h5></td>
+						<td><input class="form-control" type="password" name="memberPassword" maxlength="20" placeholder="비밀번호를 입력하세요"></td>
 					</tr>
-					<tr>
-						<th style="text-align : left;" colspan="3"><h5 style="color: red;" id="passwordCheckMessage"></h5></th>
 						
-					</tr>
-					<tr>
-						<th style="width: 110px;"><h5>이름</h5></th>
-						<td colspan="2"><input class="form-control" type="text" id="memberName" name="memberName" maxlength="20" placeholder="이름을 입력하세요"></td>
-					</tr>
-					<tr>
-						<th style="width: 110px;"><h5>이메일</h5></th>
-						<td colspan="2"><input class="form-control" type="email" id="memberEmail" name="memberEmail" maxlength="20" placeholder="이메일을 입력하세요"></td>
-					</tr>
 				</tbody>	
 			</table>
-			<input class="btn btn-primary pull-right" type="submit" value="회원가입">	
+			<input class="btn btn-primary pull-right" type="submit" value="로그인">
 		</form>
-	</div>			
-	
+	</div>
 	<%
 		String messageType = null;
 		if(session.getAttribute("messageType") != null) {
