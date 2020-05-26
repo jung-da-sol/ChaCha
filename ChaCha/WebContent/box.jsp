@@ -80,7 +80,7 @@
 		function addBox(lastID, toID, chatContent, chatTime, unread, profile) {
 			$('#boxTable').append('<tr onclick="location.href=\'chat.jsp?toID=' + encodeURIComponent(toID) + '\'">' +
 					'<td style="width: 150px;">' + 
-					'<img class="media-object img-circle" style="margin: 0 auto; max-width: 40px; max-height: 40px;" src="' + profile + '">"'
+					'<img class="media-object img-circle" style="margin: 0 auto; max-width: 40px; max-height: 40px;" src="' + profile + '">'
 					+'<h5>' + lastID + '</h5></td>' +
 					'<td>' +
 					'<h5>' + chatContent + 
@@ -115,6 +115,7 @@
 				<li><a href="index.jsp">메인</a></li>
 				<li ><a href="find.jsp">친구찾기</a></li>
 				<li class="active"><a href="box.jsp">메시지함<span id="unread" class="label label-info"></span></a></li>
+				<li ><a href="boardView.jsp">자유게시판</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">

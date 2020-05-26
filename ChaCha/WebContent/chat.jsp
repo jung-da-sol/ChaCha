@@ -106,7 +106,7 @@
 		function addChat(chatName, chatContent, chatTime){
 			if(chatName == '나') {
 			$('#chatList').append('<div class="row">' +
-					'<div class="col-lg-6 pull-right" style="background-color:yellow;">' +
+					'<div class="col-md-6 pull-right" style="background-color:yellow;">' +
 					'<div calss="media">' +
 					'<a class="pull-left" href="#">' +
 					'<img class="media-object img-circle" style="width: 30px; height: 30px;" src="<%= fromProfile %>" alt="">' +
@@ -114,7 +114,7 @@
 					'<div class="media-body">' +
 					'<h4 class="media-heading">' +
 					chatName + 
-					'<span class="small pull-right">' + 
+					'<span class="small pull-right">' + '<br>' +
 					chatTime +
 					'</span>' +
 					'</h4>' +
@@ -200,6 +200,7 @@
 				<li><a href="index.jsp">메인</a></li>
 				<li><a href="find.jsp">친구찾기</a></li>
 				<li ><a href="box.jsp">메시지함<span id="unread" class="label label-info"></span></a></li>
+				<li ><a href="boardView.jsp">자유게시판</a></li>
 			</ul>
 		<% 
 			if(memberID != null) {
